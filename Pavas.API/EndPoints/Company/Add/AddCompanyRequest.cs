@@ -5,7 +5,4 @@ public record AddCompanyRequest(
     string Name,
     string Industry,
     DateTime FoundedDate
-)
-{
-    public int OriginalId { get; set; } = Id;
-};
+);
