@@ -1,6 +1,6 @@
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 
-namespace Pavas.Domain.Executors.Customer.Add;
+namespace Pavas.Domain.Executors.Customer.Commands.Add;
 
 public record AddCustomerCommand(
     int Id,

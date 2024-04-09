@@ -2,7 +2,7 @@ using Pavas.Abstractions.DatabaseContext.Contracts;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.Abstractions.Exceptions;
 
-namespace Pavas.Domain.Executors.Customer.Add;
+namespace Pavas.Domain.Executors.Customer.Commands.Add;
 
 public class AddCustomerCommandHandler(IRepository repository) : ICommandHandler<AddCustomerCommand>
 {

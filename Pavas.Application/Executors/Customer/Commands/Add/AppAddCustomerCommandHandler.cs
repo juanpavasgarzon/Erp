@@ -1,6 +1,6 @@
 using AutoMapper;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
-using Pavas.Domain.Executors.Customer.Add;
+using Pavas.Domain.Executors.Customer.Commands.Add;
 
 namespace Pavas.Application.Executors.Customer.Commands.Add;
 

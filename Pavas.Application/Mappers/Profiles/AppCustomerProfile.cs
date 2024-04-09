@@ -1,6 +1,6 @@
 using AutoMapper;
 using Pavas.Application.Executors.Customer.Commands.Add;
-using Pavas.Domain.Executors.Customer.Add;
+using Pavas.Domain.Executors.Customer.Commands.Add;
 
 namespace Pavas.Application.Mappers.Profiles;
 
