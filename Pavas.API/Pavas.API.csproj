@@ -21,8 +21,4 @@
     <ProjectReference Include="..\Pavas.Infrastructure\Pavas.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EndPoints\Product\Add\" />
-  </ItemGroup>
-
 </Project>
