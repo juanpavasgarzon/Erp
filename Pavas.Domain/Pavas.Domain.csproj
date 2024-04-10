@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <Folder Include="Executors\Customer\Commands\" />
+    <Folder Include="Executors\Inventory\Commands\" />
+    <Folder Include="Executors\Transaction\Commands\" />
   </ItemGroup>
 
 </Project>

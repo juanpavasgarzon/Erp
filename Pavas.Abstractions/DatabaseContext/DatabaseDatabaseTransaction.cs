@@ -4,12 +4,12 @@ using Pavas.Abstractions.DatabaseContext.Contracts;
 
 namespace Pavas.Abstractions.DatabaseContext;
 
-public class Transaction : ITransaction
+public class DatabaseDatabaseTransaction : IDatabaseTransaction
 {
     private readonly IDbContextTransaction _transaction;
     private readonly CancellationToken _cancellationToken;
 
-    public Transaction(DbContext context, CancellationToken cancellationToken = default)
+    public DatabaseDatabaseTransaction(DbContext context, CancellationToken cancellationToken = default)
     {
         _transaction = context.Database.BeginTransactionAsync(cancellationToken).Result;
         _cancellationToken = cancellationToken;

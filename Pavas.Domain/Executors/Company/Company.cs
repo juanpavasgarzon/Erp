@@ -13,4 +13,5 @@ public class Company(
     public DateTime FoundedDate { get; set; } = foundedDate;
     public bool IsActive { get; set; } = true;
     public List<Employee.Employee> Employees { get; init; } = [];
+    public List<Inventory.Inventory> Inventories { get; init; } = [];
 }

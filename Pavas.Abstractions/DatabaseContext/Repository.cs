@@ -99,12 +99,12 @@ public class Repository : IRepository
         );
     }
 
-    public Task<ITransaction> BeginTransactionAsync(
+    public Task<IDatabaseTransaction> BeginTransactionAsync(
         CancellationToken cancellationToken = default
     )
     {
-        return Task.FromResult<ITransaction>(
-            new Transaction(_context, cancellationToken)
+        return Task.FromResult<IDatabaseTransaction>(
+            new DatabaseDatabaseTransaction(_context, cancellationToken)
         );
     }
 }

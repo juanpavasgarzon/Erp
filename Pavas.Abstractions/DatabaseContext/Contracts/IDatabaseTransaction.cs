@@ -1,6 +1,6 @@
 namespace Pavas.Abstractions.DatabaseContext.Contracts;
 
-public interface ITransaction: IAsyncDisposable
+public interface IDatabaseTransaction: IAsyncDisposable
 {
     Task CommitAsync();
     

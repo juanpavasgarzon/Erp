@@ -3,6 +3,8 @@ using Pavas.Abstractions.DatabaseContext;
 using Pavas.Domain.Executors.Company;
 using Pavas.Domain.Executors.Customer;
 using Pavas.Domain.Executors.Employee;
+using Pavas.Domain.Executors.Inventory;
+using Pavas.Domain.Executors.Transaction;
 
 namespace Pavas.Infrastructure.Repository.EntityFramework;
 
@@ -13,8 +15,10 @@ public sealed class DatabaseContext : BaseContext
     }
 
     public required DbSet<Company> Companies { get; set; }
-    public required DbSet<Employee> Employees { get; set; }
     public required DbSet<Customer> Customers { get; set; }
+    public required DbSet<Employee> Employees { get; set; }
+    public required DbSet<Inventory> Inventories { get; set; }
+    public required DbSet<Transaction> Transactions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -10,23 +10,24 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
         builder.ToTable("Customers");
         builder.HasKey(c => c.Id);
+
         builder.Property(c => c.FirstName)
-            .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(100)
+            .IsRequired();
         builder.Property(c => c.LastName)
-            .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(100)
+            .IsRequired();
         builder.Property(c => c.Email)
-            .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(100)
+            .IsRequired();
         builder.Property(c => c.PhoneNumber)
-            .IsRequired()
-            .HasMaxLength(20);
+            .HasMaxLength(20)
+            .IsRequired();
         builder.Property(c => c.RegistrationDate)
-            .IsRequired()
-            .HasColumnType("date");
+            .HasColumnType("date")
+            .IsRequired();
         builder.Property(c => c.IsActive)
             .HasColumnType("boolean")
-            .HasDefaultValue(true); 
+            .HasDefaultValue(true);
     }
 }

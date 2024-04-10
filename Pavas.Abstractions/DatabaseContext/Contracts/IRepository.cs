@@ -42,7 +42,7 @@ public interface IRepository
         CancellationToken cancellationToken = default
     );
 
-    Task<ITransaction> BeginTransactionAsync(
+    Task<IDatabaseTransaction> BeginTransactionAsync(
         CancellationToken cancellationToken = default
     );
 }

@@ -1,22 +1,6 @@
+using Pavas.Domain.Executors.Transaction.Constants;
+
 namespace Pavas.Domain.Executors.Transaction;
-
-public enum TransactionReason
-{
-    Sale,
-    Purchase,
-    Loss,
-    Barter,
-    StockAdjustment,
-    Expiration,
-    Donation,
-    WarrantyReceipt,
-}
-
-public enum MovementType
-{
-    In,
-    Out
-}
 
 public class Transaction(
     int id,
@@ -27,11 +11,11 @@ public class Transaction(
     TransactionReason reason
 )
 {
-    public int Id { get; set; }
-    public int InventoryId { get; set; }
-    public Executors.Inventory.Inventory Inventory { get; set; } = null!;
-    public MovementType Type { get; set; }
-    public int Quantity { get; set; }
-    public DateTime MovementDate { get; set; }
-    public TransactionReason Reason { get; set; }
+    public int Id { get; set; } = id;
+    public int InventoryId { get; set; } = inventoryId;
+    public Inventory.Inventory Inventory { get; set; } = null!;
+    public MovementType Type { get; set; } = type;
+    public int Quantity { get; set; } = quantity;
+    public DateTime MovementDate { get; set; } = movementDate;
+    public TransactionReason Reason { get; set; } = reason;
 }

@@ -10,6 +10,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {
         builder.ToTable("Employees");
         builder.HasKey(e => e.Id);
+
         builder.Property(e => e.FirstName)
             .HasMaxLength(100)
             .IsRequired();
@@ -30,6 +31,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
             .HasDefaultValue(true);
         builder.HasOne(e => e.Company)
             .WithMany(c => c.Employees)
-            .HasForeignKey(e => e.CompanyId);
+            .HasForeignKey(e => e.CompanyId)
+            .IsRequired();
     }
 }

@@ -17,7 +17,7 @@ public class Employee(
     public string Email { get; set; } = email;
     public string PhoneNumber { get; set; } = phoneNumber;
     public int CompanyId { get; set; } = companyId;
-    public Executors.Company.Company Company { get; init; } = null!;
+    public Company.Company Company { get; init; } = null!;
     public DateTime HireDate { get; set; } = hireDate;
     public bool IsActive { get; set; } = true;
 }
