@@ -11,9 +11,6 @@ public class TransactionConfiguration : IEntityTypeConfiguration<Transaction>
         builder.ToTable("Transactions");
         builder.HasKey(t => t.Id);
 
-        builder.Property(t => t.InventoryId)
-            .HasMaxLength(100)
-            .IsRequired();
         builder.HasOne(t => t.Inventory)
             .WithMany(i => i.Transactions)
             .HasForeignKey(t => t.InventoryId)

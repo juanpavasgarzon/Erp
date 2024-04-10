@@ -16,7 +16,7 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
             .HasMaxLength(CompanyConstants.NameMaxLength)
             .IsRequired();
         builder.Property(c => c.Industry)
-            .HasMaxLength(100)
+            .HasMaxLength(CompanyConstants.IndustryMaxLength)
             .IsRequired();
         builder.Property(e => e.FoundedDate)
             .HasColumnType("date")

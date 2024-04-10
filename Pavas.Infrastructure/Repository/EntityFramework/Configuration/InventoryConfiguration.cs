@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Pavas.Domain.Executors.Inventory;
+using Pavas.Domain.Executors.Inventory.Constants;
 
 namespace Pavas.Infrastructure.Repository.EntityFramework.Configuration;
 
@@ -12,12 +13,12 @@ public class InventoryConfiguration : IEntityTypeConfiguration<Inventory>
         builder.HasKey(i => i.Id);
 
         builder.Property(i => i.Name)
-            .HasMaxLength(100)
+            .HasMaxLength(InventoryConstants.NameMaxLength)
             .IsRequired();
         builder.HasIndex(i => i.Name)
             .IsUnique();
         builder.Property(i => i.Description)
-            .HasMaxLength(100)
+            .HasMaxLength(InventoryConstants.DescriptionMaxLength)
             .IsRequired();
         builder.Property(i => i.Type)
             .HasConversion<int>()

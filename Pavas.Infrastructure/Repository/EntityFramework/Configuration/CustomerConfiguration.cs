@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Pavas.Domain.Executors.Customer;
+using Pavas.Domain.Executors.Customer.Constants;
 
 namespace Pavas.Infrastructure.Repository.EntityFramework.Configuration;
 
@@ -12,16 +13,16 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.HasKey(c => c.Id);
 
         builder.Property(c => c.FirstName)
-            .HasMaxLength(100)
+            .HasMaxLength(CustomerConstants.FirstNameMaxLength)
             .IsRequired();
         builder.Property(c => c.LastName)
-            .HasMaxLength(100)
+            .HasMaxLength(CustomerConstants.LastNameMaxLength)
             .IsRequired();
         builder.Property(c => c.Email)
-            .HasMaxLength(100)
+            .HasMaxLength(CustomerConstants.EmailMaxLength)
             .IsRequired();
         builder.Property(c => c.PhoneNumber)
-            .HasMaxLength(20)
+            .HasMaxLength(CustomerConstants.PhoneNumberMaxLength)
             .IsRequired();
         builder.Property(c => c.RegistrationDate)
             .HasColumnType("date")

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Pavas.Domain.Executors.Employee;
+using Pavas.Domain.Executors.Employee.Constants;
 
 namespace Pavas.Infrastructure.Repository.EntityFramework.Configuration;
 
@@ -12,16 +13,16 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.HasKey(e => e.Id);
 
         builder.Property(e => e.FirstName)
-            .HasMaxLength(100)
+            .HasMaxLength(EmployeeConstants.FirstNameMaxLength)
             .IsRequired();
         builder.Property(e => e.LastName)
-            .HasMaxLength(100)
+            .HasMaxLength(EmployeeConstants.LastNameMaxLength)
             .IsRequired();
         builder.Property(e => e.Email)
-            .HasMaxLength(100)
+            .HasMaxLength(EmployeeConstants.EmailMaxLength)
             .IsRequired();
         builder.Property(e => e.PhoneNumber)
-            .HasMaxLength(20)
+            .HasMaxLength(EmployeeConstants.PhoneNumberMaxLength)
             .IsRequired();
         builder.Property(e => e.HireDate)
             .HasColumnType("date")
