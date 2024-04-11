@@ -1,7 +1,6 @@
 using Pavas.Abstractions.DatabaseContext.Contracts;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.Abstractions.Exceptions;
-using InvalidOperationException = Pavas.Abstractions.Exceptions.InvalidOperationException;
 
 namespace Pavas.Domain.Executors.Inventory.Commands.Remove;
 
@@ -26,7 +25,7 @@ public class RemoveInventoryCommandHandler(
 
         if (inventory.Quantity < command.Quantity)
         {
-            throw new InvalidOperationException($"The Quantities Are Not Enough, Inventory {inventory.Quantity}");
+            throw new NotAllowedException($"The Quantities Are Not Enough, Inventory {inventory.Quantity}");
         }
 
         inventory.Quantity -= command.Quantity;

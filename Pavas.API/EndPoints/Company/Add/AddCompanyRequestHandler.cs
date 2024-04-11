@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
 using Pavas.Application.Executors.Company.Commands.Add;
@@ -15,15 +16,14 @@ public class AddCompanyRequestHandler : AbstractEndPoint
     }
 
     private static async Task<IResult> HandleAsync(
-        AddCompanyRequest request,
-        ICommandDispatcher dispatcher,
-        IMapper mapper
+        [FromBody] AddCompanyRequest request,
+        [FromServices] ICommandDispatcher dispatcher,
+        [FromServices] IMapper mapper
     )
     {
         try
         {
             var command = mapper.Map<AppAddCompanyCommand>(request);
-            
             await dispatcher.DispatchAsync(command);
             return TypedResults.Created();
         }

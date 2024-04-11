@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
 using Pavas.Application.Executors.Inventory.Commands.Remove;
@@ -15,9 +16,9 @@ public class RemoveInventoryRequestHandler : AbstractEndPoint
     }
 
     private static async Task<IResult> HandleAsync(
-        RemoveInventoryRequest request,
-        ICommandDispatcher dispatcher,
-        IMapper mapper
+        [FromBody] RemoveInventoryRequest request,
+        [FromServices] ICommandDispatcher dispatcher,
+        [FromServices] IMapper mapper
     )
     {
         try

@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
 using Pavas.Application.Executors.Employee.Commands;
@@ -15,9 +16,9 @@ public class AddEmployeeRequestHandler : AbstractEndPoint
     }
 
     private static async Task<IResult> HandleAsync(
-        AddEmployeeRequest request,
-        ICommandDispatcher dispatcher,
-        IMapper mapper
+        [FromBody] AddEmployeeRequest request,
+        [FromServices] ICommandDispatcher dispatcher,
+        [FromServices] IMapper mapper
     )
     {
         try

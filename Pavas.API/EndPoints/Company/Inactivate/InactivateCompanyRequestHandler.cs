@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
 using Pavas.Application.Executors.Company.Commands.Inactivate;
@@ -15,9 +16,9 @@ public class InactivateCompanyRequestHandler : AbstractEndPoint
     }
 
     private static async Task<IResult> HandleAsync(
-        InactivateCompanyRequest request,
-        ICommandDispatcher dispatcher,
-        IMapper mapper
+       [FromBody] InactivateCompanyRequest request,
+       [FromServices] ICommandDispatcher dispatcher,
+       [FromServices] IMapper mapper
     )
     {
         try

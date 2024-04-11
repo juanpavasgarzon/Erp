@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Pavas.Abstractions.Exceptions;
 using Pavas.API.MinimalApi.Contracts;
-using InvalidOperationException = Pavas.Abstractions.Exceptions.InvalidOperationException;
 
 namespace Pavas.API.MinimalApi;
 
@@ -50,7 +49,7 @@ public abstract class AbstractEndPoint : IEndpoint
             });
         }
 
-        if (exception is InvalidOperationException)
+        if (exception is NotAllowedException)
         {
             return TypedResults.Problem(
                 detail: $"Message: {exception.Message}, Original: {originalException.Message}",
