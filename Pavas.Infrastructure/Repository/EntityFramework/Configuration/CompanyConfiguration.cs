@@ -12,12 +12,20 @@ public class CompanyConfiguration : IEntityTypeConfiguration<Company>
         builder.ToTable("Companies");
         builder.HasKey(c => c.Id);
 
+        builder.Property(c => c.Id)
+            .ValueGeneratedNever()
+            .IsRequired();
         builder.Property(c => c.Name)
             .HasMaxLength(CompanyConstants.NameMaxLength)
             .IsRequired();
         builder.Property(c => c.Industry)
             .HasMaxLength(CompanyConstants.IndustryMaxLength)
             .IsRequired();
+        builder.Property(c => c.Email)
+            .HasMaxLength(CompanyConstants.EmailMaxLength)
+            .IsRequired();
+        builder.HasIndex(c => c.Email)
+            .IsUnique();
         builder.Property(e => e.FoundedDate)
             .HasColumnType("date")
             .IsRequired();

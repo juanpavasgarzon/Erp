@@ -1,28 +1,28 @@
 using AutoMapper;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
-using Pavas.Application.Executors.Company.Commands.Inactivate;
+using Pavas.Application.Executors.Inventory.Commands.Add;
 
-namespace Pavas.API.EndPoints.Company.Inactivate;
+namespace Pavas.API.EndPoints.Inventory.Add;
 
-public class InactivateCompanyRequestHandler : AbstractEndPoint
+public class AddInventoryRequestHandler : AbstractEndPoint
 {
     public override void Configure(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPatch("/company/inactivate", HandleAsync)
-            .WithTags("Company")
-            .WithDescription("Endpoint To Inactivate One Company");
+        endpoints.MapPost("/inventories", HandleAsync)
+            .WithTags("Inventory")
+            .WithDescription("Endpoint To Add Inventory");
     }
 
     private static async Task<IResult> HandleAsync(
-        InactivateCompanyRequest request,
+        AddInventoryRequest request,
         ICommandDispatcher dispatcher,
         IMapper mapper
     )
     {
         try
         {
-            var command = mapper.Map<AppInactivateCompanyCommand>(request);
+            var command = mapper.Map<AppAddInventoryCommand>(request);
             await dispatcher.DispatchAsync(command);
             return TypedResults.Ok();
         }

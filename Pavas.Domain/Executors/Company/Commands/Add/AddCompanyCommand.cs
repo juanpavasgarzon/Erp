@@ -6,7 +6,6 @@ public record AddCompanyCommand(
     int Id,
     string Name,
     string Industry,
+    string Email,
     DateTime FoundedDate
 ) : ICommand;
-
-

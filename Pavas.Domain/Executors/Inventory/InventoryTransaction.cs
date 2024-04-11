@@ -1,9 +1,8 @@
-using Pavas.Domain.Executors.Transaction.Constants;
+using Pavas.Domain.Executors.Inventory.Constants;
 
-namespace Pavas.Domain.Executors.Transaction;
+namespace Pavas.Domain.Executors.Inventory;
 
-public class Transaction(
-    int id,
+public class InventoryTransaction(
     int inventoryId,
     MovementType type,
     int quantity,
@@ -11,9 +10,9 @@ public class Transaction(
     TransactionReason reason
 )
 {
-    public int Id { get; set; } = id;
+    public int Id { get; set; }
     public int InventoryId { get; set; } = inventoryId;
-    public Inventory.Inventory Inventory { get; set; } = null!;
+    public Inventory Inventory { get; set; } = null!;
     public MovementType Type { get; set; } = type;
     public int Quantity { get; set; } = quantity;
     public DateTime MovementDate { get; set; } = movementDate;

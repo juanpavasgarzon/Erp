@@ -12,11 +12,17 @@ public class InventoryConfiguration : IEntityTypeConfiguration<Inventory>
         builder.ToTable("Inventories");
         builder.HasKey(i => i.Id);
 
+        builder.Property(t => t.Id)
+            .ValueGeneratedOnAdd()
+            .IsRequired();
+        builder.Property(t => t.Code)
+            .HasMaxLength(InventoryConstants.CodeMaxLength)
+            .IsRequired();
+        builder.HasIndex(i => i.Code)
+            .IsUnique();
         builder.Property(i => i.Name)
             .HasMaxLength(InventoryConstants.NameMaxLength)
             .IsRequired();
-        builder.HasIndex(i => i.Name)
-            .IsUnique();
         builder.Property(i => i.Description)
             .HasMaxLength(InventoryConstants.DescriptionMaxLength)
             .IsRequired();

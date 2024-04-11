@@ -15,6 +15,7 @@
     <Folder Include="Executors\Company\Queries\" />
     <Folder Include="Executors\Customer\Queries\" />
     <Folder Include="Executors\Employee\Queries\" />
+    <Folder Include="Executors\Inventory\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -11,7 +11,10 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
         builder.ToTable("Customers");
         builder.HasKey(c => c.Id);
-
+        
+        builder.Property(t => t.Id)
+            .ValueGeneratedNever()
+            .IsRequired();
         builder.Property(c => c.FirstName)
             .HasMaxLength(CustomerConstants.FirstNameMaxLength)
             .IsRequired();
@@ -21,6 +24,8 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(c => c.Email)
             .HasMaxLength(CustomerConstants.EmailMaxLength)
             .IsRequired();
+        builder.HasIndex(c => c.Email)
+            .IsUnique();
         builder.Property(c => c.PhoneNumber)
             .HasMaxLength(CustomerConstants.PhoneNumberMaxLength)
             .IsRequired();

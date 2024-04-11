@@ -12,6 +12,6 @@ public class AppInactivateCompanyCommandHandler(
     public async Task HandleAsync(AppInactivateCompanyCommand appCommand, CancellationToken cancellationToken = default)
     {
         var command = mapper.Map<InactivateCompanyCommand>(appCommand);
-        await dispatcher.DispatchAsync<>(command, cancellationToken);
+        await dispatcher.DispatchAsync(command, cancellationToken);
     }
 }

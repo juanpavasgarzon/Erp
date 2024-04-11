@@ -38,6 +38,11 @@ public interface IRepository
         CancellationToken cancellationToken = default
     ) where TEntity : class;
 
+    public Task<TEntity?> GetFirstByIdAsync<TEntity>(
+        Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken = default
+    ) where TEntity : class;
+
     Task<int> SaveChangesAsync(
         CancellationToken cancellationToken = default
     );

@@ -1,9 +1,8 @@
-using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.Domain.Executors.Inventory.Constants;
 
-namespace Pavas.Domain.Executors.Inventory.Commands.Add;
+namespace Pavas.API.EndPoints.Inventory.Add;
 
-public record AddInventoryCommand(
+public record AddInventoryRequest(
     int Code,
     string Name,
     string Description,
@@ -11,4 +10,4 @@ public record AddInventoryCommand(
     InventoryType Type,
     decimal Price,
     int Quantity
-) : ICommand;
+);

@@ -18,6 +18,7 @@ public class CreateCompanyCommandHandler(IRepository repository) : ICommandHandl
             command.Id,
             command.Name,
             command.Industry,
+            command.Email,
             command.FoundedDate
         );
 

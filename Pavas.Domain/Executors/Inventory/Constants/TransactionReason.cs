@@ -1,4 +1,4 @@
-namespace Pavas.Domain.Executors.Transaction.Constants;
+namespace Pavas.Domain.Executors.Inventory.Constants;
 
 public enum TransactionReason
 {

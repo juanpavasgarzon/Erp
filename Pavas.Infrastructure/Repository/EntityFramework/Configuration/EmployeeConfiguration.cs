@@ -12,6 +12,9 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.ToTable("Employees");
         builder.HasKey(e => e.Id);
 
+        builder.Property(t => t.Id)
+            .ValueGeneratedNever()
+            .IsRequired();
         builder.Property(e => e.FirstName)
             .HasMaxLength(EmployeeConstants.FirstNameMaxLength)
             .IsRequired();
@@ -21,6 +24,8 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
         builder.Property(e => e.Email)
             .HasMaxLength(EmployeeConstants.EmailMaxLength)
             .IsRequired();
+        builder.HasIndex(e => e.Email)
+            .IsUnique();
         builder.Property(e => e.PhoneNumber)
             .HasMaxLength(EmployeeConstants.PhoneNumberMaxLength)
             .IsRequired();

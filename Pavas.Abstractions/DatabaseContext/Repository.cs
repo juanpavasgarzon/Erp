@@ -90,6 +90,14 @@ public class Repository : IRepository
         return await task;
     }
 
+    public async Task<TEntity?> GetFirstByIdAsync<TEntity>(
+        Expression<Func<TEntity, bool>> predicate,
+        CancellationToken cancellationToken = default
+    ) where TEntity : class
+    {
+        return await _context.Set<TEntity>().FirstOrDefaultAsync(predicate, cancellationToken);
+    }
+
     public async Task<int> SaveChangesAsync(
         CancellationToken cancellationToken = default
     )
