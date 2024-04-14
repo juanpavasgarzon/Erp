@@ -29,7 +29,7 @@ public class AppRemoveInventoryCommandHandler(
                 MovementType.Out,
                 command.Quantity,
                 DateTime.Now,
-                TransactionReason.Barter
+                TransactionReason.DirectOutput
             );
             await dispatcher.DispatchAsync(transactionCommand, cancellationToken);
 

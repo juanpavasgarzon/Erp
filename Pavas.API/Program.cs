@@ -13,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpoints();
 
+builder.Logging.ClearProviders();
+
 builder.Services.AddDbContext<BaseContext, DatabaseContext>((services, options) =>
 {
     options.UseNpgsql(services.GetService<IConfiguration>()?.GetConnectionString("Default"));
@@ -32,7 +34,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.MapEndpoints();
+// app.UseHttpsRedirection();
 app.Run();

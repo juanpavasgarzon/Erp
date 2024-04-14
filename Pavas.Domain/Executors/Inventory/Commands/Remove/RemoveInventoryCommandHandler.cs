@@ -30,9 +30,7 @@ public class RemoveInventoryCommandHandler(
 
         inventory.Quantity -= command.Quantity;
         await repository.UpdateAsync(inventory, cancellationToken);
-
         await repository.SaveChangesAsync(cancellationToken);
-
         return new RemoveInventoryCommandResult(inventory.Id);
     }
 }

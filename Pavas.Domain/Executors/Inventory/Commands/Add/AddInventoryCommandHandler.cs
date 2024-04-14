@@ -38,7 +38,6 @@ public class AddInventoryCommandHandler(
         }
 
         await repository.SaveChangesAsync(cancellationToken);
-
         return new AddInventoryCommandResult(inventory.Id);
     }
 }

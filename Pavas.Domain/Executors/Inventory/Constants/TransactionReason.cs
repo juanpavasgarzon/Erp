@@ -10,4 +10,6 @@ public enum TransactionReason
     Expiration,
     Donation,
     WarrantyReceipt,
+    DirectEntry,
+    DirectOutput
 }
