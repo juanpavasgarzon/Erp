@@ -5,7 +5,7 @@ namespace Pavas.Domain.Executors.Inventory;
 public class InventoryTransaction(
     int inventoryId,
     MovementType type,
-    int quantity,
+    decimal quantity,
     DateTime movementDate,
     TransactionReason reason
 )
@@ -14,7 +14,7 @@ public class InventoryTransaction(
     public int InventoryId { get; set; } = inventoryId;
     public Inventory Inventory { get; set; } = null!;
     public MovementType Type { get; set; } = type;
-    public int Quantity { get; set; } = quantity;
+    public decimal Quantity { get; set; } = quantity;
     public DateTime MovementDate { get; set; } = movementDate;
     public TransactionReason Reason { get; set; } = reason;
 }

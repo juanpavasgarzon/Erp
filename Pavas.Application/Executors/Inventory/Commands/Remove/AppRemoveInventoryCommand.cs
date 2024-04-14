@@ -2,7 +2,7 @@ using Pavas.Abstractions.Dispatch.Commands.Contracts;
 
 namespace Pavas.Application.Executors.Inventory.Commands.Remove;
 
-public class AppRemoveInventoryCommand(
+public record AppRemoveInventoryCommand(
     int Code,
-    int Quantity
+    decimal Quantity
 ) : ICommand;

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Pavas.Domain.Executors.Inventory;
+using Pavas.Domain.Executors.Inventory.Constants;
 
 namespace Pavas.Infrastructure.Repository.EntityFramework.Configuration;
 
@@ -19,7 +20,10 @@ public class TransactionConfiguration : IEntityTypeConfiguration<InventoryTransa
             .HasForeignKey(t => t.InventoryId)
             .IsRequired();
         builder.Property(t => t.Type)
-            .HasConversion<int>()
+            .HasConversion(
+                m => m.ToString(),
+                m => (MovementType)Enum.Parse(typeof(MovementType), m)
+            )
             .IsRequired();
         builder.Property(i => i.Quantity)
             .HasConversion<decimal>()
@@ -27,8 +31,11 @@ public class TransactionConfiguration : IEntityTypeConfiguration<InventoryTransa
         builder.Property(t => t.MovementDate)
             .HasColumnType("date")
             .IsRequired();
-        builder.Property(t => t.Reason)
-            .HasConversion<int>()
+        builder.Property(i => i.Reason)
+            .HasConversion(
+                i => i.ToString(),
+                i => (TransactionReason)Enum.Parse(typeof(TransactionReason), i)
+            )
             .IsRequired();
     }
 }

@@ -27,7 +27,10 @@ public class InventoryConfiguration : IEntityTypeConfiguration<Inventory>
             .HasMaxLength(InventoryConstants.DescriptionMaxLength)
             .IsRequired();
         builder.Property(i => i.Type)
-            .HasConversion<int>()
+            .HasConversion(
+                t => t.ToString(),
+                t => (InventoryType)Enum.Parse(typeof(InventoryType), t)
+            )
             .IsRequired();
         builder.HasOne(i => i.Company)
             .WithMany(c => c.Inventories)

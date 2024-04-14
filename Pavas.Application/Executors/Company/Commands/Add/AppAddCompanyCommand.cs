@@ -6,5 +6,6 @@ public record AppAddCompanyCommand(
     int Id,
     string Name,
     string Industry,
+    string Email,
     DateTime FoundedDate
 ) : ICommand;

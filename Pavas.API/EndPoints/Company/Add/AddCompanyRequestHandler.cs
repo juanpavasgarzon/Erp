@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
@@ -16,11 +17,22 @@ public class AddCompanyRequestHandler : AbstractEndPoint
     }
 
     private static async Task<IResult> HandleAsync(
-        [FromBody] AddCompanyRequest request,
+        [FromServices] IValidator<AddCompanyRequest> validator,
         [FromServices] ICommandDispatcher dispatcher,
-        [FromServices] IMapper mapper
+        [FromServices] IMapper mapper,
+        [FromBody] AddCompanyRequest request
     )
     {
+        var validationResult = await validator.ValidateAsync(request);
+        if (validationResult.Errors is not null)
+        {
+            return TypedResults.BadRequest<object>(new
+            {
+                Detail = validationResult.ToDictionary(),
+                Status = StatusCodes.Status400BadRequest
+            });
+        }
+
         try
         {
             var command = mapper.Map<AppAddCompanyCommand>(request);

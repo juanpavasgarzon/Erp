@@ -6,7 +6,7 @@ namespace Pavas.Domain.Executors.Inventory.Commands.Transaction;
 public record AddInventoryTransactionCommand(
     int inventoryId,
     MovementType type,
-    int quantity,
+    decimal quantity,
     DateTime movementDate,
     TransactionReason reason
 ) : ICommand;

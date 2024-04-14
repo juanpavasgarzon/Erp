@@ -16,5 +16,6 @@ public class InactivateCompanyCommandHandler(IRepository repository) : ICommandH
 
         company.IsActive = false;
         await repository.UpdateAsync(company, cancellationToken);
+        await repository.SaveChangesAsync(cancellationToken);
     }
 }

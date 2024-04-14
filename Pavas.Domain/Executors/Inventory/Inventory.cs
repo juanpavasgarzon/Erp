@@ -9,7 +9,7 @@ public class Inventory(
     int companyId,
     InventoryType type,
     decimal price,
-    int quantity
+    decimal quantity
 )
 {
     public int Id { get; set; }
@@ -20,6 +20,6 @@ public class Inventory(
     public Company.Company Company { get; set; } = null!;
     public InventoryType Type { get; set; } = type;
     public decimal Price { get; set; } = price;
-    public int Quantity { get; set; } = quantity;
+    public decimal Quantity { get; set; } = quantity;
     public List<InventoryTransaction> Transactions { get; init; } = [];
 }
