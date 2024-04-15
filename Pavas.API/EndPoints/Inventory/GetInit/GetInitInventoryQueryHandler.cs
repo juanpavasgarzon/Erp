@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Queries.Contracts;
 using Pavas.API.MinimalApi;
-using Pavas.Application.Executors.Inventory.Queries.Get;
+using Pavas.Application.Executors.Inventory.Queries.GetInit;
 
 namespace Pavas.API.EndPoints.Inventory.Get;
 
@@ -18,8 +18,8 @@ public class GetInitInventoryQueryHandler : AbstractEndPoint
     {
         try
         {
-            var data = await dispatcher.QueryAsync<AppGetInitInventoryQueryResult>();
-            var response = new GetInitInventoryRequestResponse(data.InventoryTypes);
+            var result = await dispatcher.QueryAsync<AppGetInitInventoryQueryResult>();
+            var response = new GetInitInventoryRequestResponse(result.InventoryTypes);
             return TypedResults.Ok(response);
         }
         catch (Exception e)

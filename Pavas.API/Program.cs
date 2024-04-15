@@ -1,7 +1,6 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Pavas.Abstractions.Authentication;
-using Pavas.Abstractions.Authentication.Contracts;
 using Pavas.Abstractions.DatabaseContext;
 using Pavas.Abstractions.DatabaseContext.Contracts;
 using Pavas.Abstractions.Dispatch.Commands;

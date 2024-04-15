@@ -1,7 +1,8 @@
 using Pavas.Abstractions.Dispatch.Queries.Contracts;
 using Pavas.Domain.Executors.Inventory.Queries;
+using Pavas.Domain.Executors.Inventory.Queries.GetInit;
 
-namespace Pavas.Application.Executors.Inventory.Queries.Get;
+namespace Pavas.Application.Executors.Inventory.Queries.GetInit;
 
 public class AppGetInitInventoryQueryHandler(
     IQueryDispatcher dispatcher
