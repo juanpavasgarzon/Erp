@@ -2,7 +2,8 @@ namespace Pavas.Domain.Executors.Inventory.Constants;
 
 public enum InventoryType
 {
-    Product,
-    Service,
-    Asset
+    FinishedProduct,
+    RawMaterial,
+    GeneralInventory,
+    Active
 }
