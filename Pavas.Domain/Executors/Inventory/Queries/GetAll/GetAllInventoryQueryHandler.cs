@@ -12,13 +12,21 @@ public class GetAllInventoryQueryHandler(
         CancellationToken cancellationToken = default
     )
     {
-        var result = await repository.GetByAsync<Inventory>(
+        var result = (await repository.GetByAsync<Inventory>(
             x => x.CompanyId == query.CompanyId,
             cancellationToken
-        );
-        var items = result.Select(i =>
-            new InventoryQueryResultItem(i.Id, i.Code, i.Name, i.Description, i.Type.ToString(), i.Price, i.Quantity)
-        ).ToList();
+        )).OrderByDescending(x => x.Id).ToList();
+        var items = result.Select(i => new InventoryQueryResultItem(
+                i.Id,
+                i.Code,
+                i.Name,
+                i.Description,
+                i.Type.ToString(),
+                i.Price,
+                i.Quantity
+            ))
+            .OrderByDescending(x => x.Id)
+            .ToList();
 
         return new GetAllInventoryQueryResult(items);
     }
