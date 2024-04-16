@@ -2,7 +2,7 @@ using Pavas.Abstractions.DatabaseContext.Contracts;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.Abstractions.Exceptions;
 
-namespace Pavas.Domain.Executors.Inventory.Commands.Remove;
+namespace Pavas.Domain.Executors.Inventory.Commands.Subtract;
 
 public class SubtractInventoryCommandHandler(
     IRepository repository
@@ -13,14 +13,10 @@ public class SubtractInventoryCommandHandler(
         CancellationToken cancellationToken = default
     )
     {
-        var inventory = await repository.GetFirstByIdAsync<Inventory>(
-            i => i.Code == command.Code,
-            cancellationToken
-        );
-
+        var inventory = await repository.GetByIdAsync<Inventory, int>(command.InventoryId, cancellationToken);
         if (inventory is null)
         {
-            throw new EntityNotFoundException($"Inventory With Code {command.Code} Is not Allowed");
+            throw new EntityNotFoundException($"Inventory With Id '{command.InventoryId}' Is Not Found");
         }
 
         if (inventory.Quantity < command.Quantity)

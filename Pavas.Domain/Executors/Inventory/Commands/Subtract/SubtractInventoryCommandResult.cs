@@ -1,3 +1,3 @@
-namespace Pavas.Domain.Executors.Inventory.Commands.Remove;
+namespace Pavas.Domain.Executors.Inventory.Commands.Subtract;
 
 public record SubtractInventoryCommandResult(int InventoryId);

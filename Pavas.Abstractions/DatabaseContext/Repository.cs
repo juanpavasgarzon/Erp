@@ -20,7 +20,6 @@ public class Repository : IRepository
     ) where TEntity : class
     {
         await _context.Set<TEntity>().AddAsync(entity, cancellationToken);
-
         return entity;
     }
 
@@ -69,9 +68,7 @@ public class Repository : IRepository
             () => _context.Set<TEntity>().AsNoTracking().AsQueryable(),
             cancellationToken
         );
-
         task.Start();
-
         return await task;
     }
 
@@ -84,9 +81,7 @@ public class Repository : IRepository
             () => _context.Set<TEntity>().Where(predicate).AsNoTracking().AsQueryable(),
             cancellationToken
         );
-
         task.Start();
-
         return await task;
     }
 
@@ -102,9 +97,7 @@ public class Repository : IRepository
         CancellationToken cancellationToken = default
     )
     {
-        return await _context.SaveChangesAsync(
-            cancellationToken
-        );
+        return await _context.SaveChangesAsync(cancellationToken);
     }
 
     public Task<IDatabaseTransaction> BeginTransactionAsync(

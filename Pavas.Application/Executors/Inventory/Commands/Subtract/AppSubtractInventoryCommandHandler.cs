@@ -1,16 +1,13 @@
-using AutoMapper;
 using Pavas.Abstractions.DatabaseContext.Contracts;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
-using Pavas.Application.Executors.Inventory.Commands.Subtract;
-using Pavas.Domain.Executors.Inventory.Commands.Remove;
+using Pavas.Domain.Executors.Inventory.Commands.Subtract;
 using Pavas.Domain.Executors.Inventory.Commands.Transaction;
 using Pavas.Domain.Executors.Inventory.Constants;
 
-namespace Pavas.Application.Executors.Inventory.Commands.Remove;
+namespace Pavas.Application.Executors.Inventory.Commands.Subtract;
 
 public class AppSubtractInventoryCommandHandler(
     ICommandDispatcher dispatcher,
-    IMapper mapper,
     IRepository repository
 ) : ICommandHandler<AppSubtractInventoryCommand>
 {
@@ -19,8 +16,8 @@ public class AppSubtractInventoryCommandHandler(
         var transaction = await repository.BeginTransactionAsync(cancellationToken);
         try
         {
-            var command = mapper.Map<RemoveInventoryCommand>(appCommand);
-            var result = await dispatcher.DispatchAsync<RemoveInventoryCommand, RemoveInventoryCommandResult>(
+            var command = new SubtractInventoryCommand(appCommand.InventoryId, appCommand.Quantity);
+            var result = await dispatcher.DispatchAsync<SubtractInventoryCommand, SubtractInventoryCommandResult>(
                 command,
                 cancellationToken
             );
@@ -33,7 +30,6 @@ public class AppSubtractInventoryCommandHandler(
                 TransactionReason.DirectOutput
             );
             await dispatcher.DispatchAsync(transactionCommand, cancellationToken);
-
             await transaction.CommitAsync();
         }
         catch (Exception)

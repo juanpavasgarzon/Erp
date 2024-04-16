@@ -10,5 +10,5 @@ public record AddInventoryCommand(
     int CompanyId,
     InventoryType Type,
     decimal Price,
-    int Quantity
+    decimal Quantity
 ) : ICommand;

@@ -16,6 +16,10 @@ public class GetAllInventoryQueryHandler(
             x => x.CompanyId == query.CompanyId,
             cancellationToken
         );
-        return new GetAllInventoryQueryResult(result.ToList());
+        var items = result.Select(i =>
+            new InventoryQueryResultItem(i.Id, i.Code, i.Name, i.Description, i.Type.ToString(), i.Price, i.Quantity)
+        ).ToList();
+
+        return new GetAllInventoryQueryResult(items);
     }
 }

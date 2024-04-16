@@ -1,4 +1,3 @@
-using AutoMapper;
 using Pavas.Abstractions.DatabaseContext.Contracts;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.Domain.Executors.Inventory.Commands.Add;
@@ -9,7 +8,6 @@ namespace Pavas.Application.Executors.Inventory.Commands.Add;
 
 public class AppAddInventoryCommandHandler(
     ICommandDispatcher dispatcher,
-    IMapper mapper,
     IRepository repository
 ) : ICommandHandler<AppAddInventoryCommand>
 {
@@ -18,7 +16,15 @@ public class AppAddInventoryCommandHandler(
         var transaction = await repository.BeginTransactionAsync(cancellationToken);
         try
         {
-            var command = mapper.Map<AddInventoryCommand>(appCommand);
+            var command = new AddInventoryCommand(
+                appCommand.Code,
+                appCommand.Name,
+                appCommand.Description,
+                appCommand.CompanyId,
+                appCommand.Type,
+                appCommand.Price,
+                appCommand.Quantity
+            );
             var result = await dispatcher.DispatchAsync<AddInventoryCommand, AddInventoryCommandResult>(
                 command,
                 cancellationToken
@@ -32,7 +38,6 @@ public class AppAddInventoryCommandHandler(
                 TransactionReason.DirectEntry
             );
             await dispatcher.DispatchAsync(transactionCommand, cancellationToken);
-
             await transaction.CommitAsync();
         }
         catch (Exception)

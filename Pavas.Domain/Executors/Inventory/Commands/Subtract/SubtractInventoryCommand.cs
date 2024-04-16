@@ -1,8 +1,8 @@
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 
-namespace Pavas.Domain.Executors.Inventory.Commands.Remove;
+namespace Pavas.Domain.Executors.Inventory.Commands.Subtract;
 
-public record RemoveInventoryCommand(
-    int Code,
+public record SubtractInventoryCommand(
+    int InventoryId,
     decimal Quantity
 ) : ICommand;

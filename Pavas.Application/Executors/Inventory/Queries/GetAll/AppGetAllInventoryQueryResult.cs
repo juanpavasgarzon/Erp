@@ -1,5 +1,13 @@
-using InventoryDomain = Pavas.Domain.Executors.Inventory.Inventory;
-
 namespace Pavas.Application.Executors.Inventory.Queries.GetAll;
 
-public record AppGetAllInventoryQueryResult(List<InventoryDomain> Inventories);
+public record AppInventoryQueryResultItem(
+    int Id,
+    int Code,
+    string Name,
+    string Description,
+    string Type,
+    decimal Price,
+    decimal Quantity
+);
+
+public record AppGetAllInventoryQueryResult(List<AppInventoryQueryResultItem> Inventories);

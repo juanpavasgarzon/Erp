@@ -1,5 +1,4 @@
 using Pavas.Abstractions.Dispatch.Queries.Contracts;
-using Pavas.Domain.Executors.Inventory.Queries;
 using Pavas.Domain.Executors.Inventory.Queries.GetInit;
 
 namespace Pavas.Application.Executors.Inventory.Queries.GetInit;
