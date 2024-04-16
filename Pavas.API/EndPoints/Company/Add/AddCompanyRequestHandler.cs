@@ -1,4 +1,3 @@
-using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
@@ -11,7 +10,7 @@ public class AddCompanyRequestHandler : AbstractEndPoint
 {
     public override void Configure(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/companies", HandleAsync)
+        endpoints.MapPost("/companies/add", HandleAsync)
             .WithTags("Company")
             .WithDescription("Endpoint To Create One Company");
     }
@@ -19,7 +18,6 @@ public class AddCompanyRequestHandler : AbstractEndPoint
     private static async Task<IResult> HandleAsync(
         [FromServices] IValidator<AddCompanyRequest> validator,
         [FromServices] ICommandDispatcher dispatcher,
-        [FromServices] IMapper mapper,
         [FromBody] AddCompanyRequest request
     )
     {
@@ -35,7 +33,13 @@ public class AddCompanyRequestHandler : AbstractEndPoint
 
         try
         {
-            var command = mapper.Map<AppAddCompanyCommand>(request);
+            var command = new AppAddCompanyCommand(
+                request.Id,
+                request.Name,
+                request.Industry,
+                request.Email,
+                request.FoundedDate
+            );
             await dispatcher.DispatchAsync(command);
             return TypedResults.Created();
         }

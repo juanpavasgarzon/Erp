@@ -1,5 +1,13 @@
-using InventoryDomain = Pavas.Domain.Executors.Inventory.Inventory;
-
 namespace Pavas.API.EndPoints.Inventory.GetAll;
 
-public record GetAllInventoryRequestResponse(List<InventoryDomain> Inventories);
+public record InventoryRequestResponseItem(
+    int Id,
+    int Code,
+    string Name,
+    string Description,
+    string Type,
+    decimal Price,
+    decimal Quantity
+);
+
+public record GetAllInventoryRequestResponse(List<InventoryRequestResponseItem> Inventories);

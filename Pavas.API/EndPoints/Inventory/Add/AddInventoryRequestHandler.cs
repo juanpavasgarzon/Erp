@@ -1,4 +1,4 @@
-using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
@@ -10,22 +10,40 @@ public class AddInventoryRequestHandler : AbstractEndPoint
 {
     public override void Configure(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/inventories", HandleAsync)
+        endpoints.MapPost("/inventories/add", HandleAsync)
             .WithTags("Inventory")
             .WithDescription("Endpoint To Add Inventory");
     }
 
     private static async Task<IResult> HandleAsync(
-        [FromBody] AddInventoryRequest request,
+        [FromServices] IValidator<AddInventoryRequest> validator,
         [FromServices] ICommandDispatcher dispatcher,
-        [FromServices] IMapper mapper
+        [FromBody] AddInventoryRequest request
     )
     {
+        var validationResult = await validator.ValidateAsync(request);
+        if (validationResult.Errors is not null)
+        {
+            return TypedResults.BadRequest<object>(new
+            {
+                Detail = validationResult.ToDictionary(),
+                Status = StatusCodes.Status400BadRequest
+            });
+        }
+
         try
         {
-            var command = mapper.Map<AppAddInventoryCommand>(request);
+            var command = new AppAddInventoryCommand(
+                request.Code,
+                request.Name,
+                request.Description,
+                request.CompanyId,
+                request.Type,
+                request.Price,
+                request.Quantity
+            );
             await dispatcher.DispatchAsync(command);
-            return TypedResults.Ok();
+            return TypedResults.NoContent();
         }
         catch (Exception e)
         {

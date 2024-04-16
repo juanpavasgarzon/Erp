@@ -3,7 +3,7 @@ using Pavas.Abstractions.Dispatch.Queries.Contracts;
 using Pavas.API.MinimalApi;
 using Pavas.Application.Executors.Inventory.Queries.GetInit;
 
-namespace Pavas.API.EndPoints.Inventory.Get;
+namespace Pavas.API.EndPoints.Inventory.GetInit;
 
 public class GetInitInventoryQueryHandler : AbstractEndPoint
 {

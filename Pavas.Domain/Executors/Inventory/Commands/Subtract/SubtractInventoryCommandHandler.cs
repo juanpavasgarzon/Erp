@@ -4,12 +4,12 @@ using Pavas.Abstractions.Exceptions;
 
 namespace Pavas.Domain.Executors.Inventory.Commands.Remove;
 
-public class RemoveInventoryCommandHandler(
+public class SubtractInventoryCommandHandler(
     IRepository repository
-) : ICommandHandler<RemoveInventoryCommand, RemoveInventoryCommandResult>
+) : ICommandHandler<SubtractInventoryCommand, SubtractInventoryCommandResult>
 {
-    public async Task<RemoveInventoryCommandResult> HandleAsync(
-        RemoveInventoryCommand command,
+    public async Task<SubtractInventoryCommandResult> HandleAsync(
+        SubtractInventoryCommand command,
         CancellationToken cancellationToken = default
     )
     {
@@ -31,6 +31,6 @@ public class RemoveInventoryCommandHandler(
         inventory.Quantity -= command.Quantity;
         await repository.UpdateAsync(inventory, cancellationToken);
         await repository.SaveChangesAsync(cancellationToken);
-        return new RemoveInventoryCommandResult(inventory.Id);
+        return new SubtractInventoryCommandResult(inventory.Id);
     }
 }

@@ -1,4 +1,4 @@
-using AutoMapper;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
@@ -10,20 +10,38 @@ public class AddEmployeeRequestHandler : AbstractEndPoint
 {
     public override void Configure(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/employees", HandleAsync)
+        endpoints.MapPost("/employees/add", HandleAsync)
             .WithTags("Employee")
             .WithDescription("Endpoint To Create One Employee");
     }
 
     private static async Task<IResult> HandleAsync(
-        [FromBody] AddEmployeeRequest request,
+        [FromServices] IValidator<AddEmployeeRequest> validator,
         [FromServices] ICommandDispatcher dispatcher,
-        [FromServices] IMapper mapper
+        [FromBody] AddEmployeeRequest request
     )
     {
+        var validationResult = await validator.ValidateAsync(request);
+        if (validationResult.Errors is not null)
+        {
+            return TypedResults.BadRequest<object>(new
+            {
+                Detail = validationResult.ToDictionary(),
+                Status = StatusCodes.Status400BadRequest
+            });
+        }
+
         try
         {
-            var command = mapper.Map<AppAddEmployeeCommand>(request);
+            var command = new AppAddEmployeeCommand(
+                request.Id,
+                request.FirstName,
+                request.LastName,
+                request.Email,
+                request.PhoneNumber,
+                request.CompanyId,
+                request.HireDate
+            );
             await dispatcher.DispatchAsync(command);
             return TypedResults.Created();
         }

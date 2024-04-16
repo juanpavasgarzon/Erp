@@ -1,3 +1,3 @@
-namespace Pavas.API.EndPoints.Inventory.Get;
+namespace Pavas.API.EndPoints.Inventory.GetInit;
 
 public record GetInitInventoryRequestResponse(List<object> InventoryTypes);

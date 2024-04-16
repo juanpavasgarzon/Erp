@@ -2,23 +2,24 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Pavas.Abstractions.Dispatch.Commands.Contracts;
 using Pavas.API.MinimalApi;
-using Pavas.Application.Executors.Customer.Commands.Add;
+using Pavas.Application.Executors.Inventory.Commands.Subtract;
 
-namespace Pavas.API.EndPoints.Customer.Add;
+namespace Pavas.API.EndPoints.Inventory.Subtract;
 
-public class AddCustomerRequestHandler : AbstractEndPoint
+public class SubtractInventoryRequestHandler : AbstractEndPoint
 {
     public override void Configure(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapPost("/customers/add", HandleAsync)
-            .WithTags("Customer")
-            .WithDescription("Endpoint To Create One Customer");
+        endpoints.MapPatch("/inventories/subtract/{inventoryId:int}", HandleAsync)
+            .WithTags("Inventory")
+            .WithDescription("Endpoint To Remove Inventory");
     }
 
     private static async Task<IResult> HandleAsync(
-        [FromServices] IValidator<AddCustomerRequest> validator,
+        [FromServices] IValidator<SubtractInventoryRequest> validator,
         [FromServices] ICommandDispatcher dispatcher,
-        [FromBody] AddCustomerRequest request
+        [FromBody] SubtractInventoryRequest request,
+        int inventoryId
     )
     {
         var validationResult = await validator.ValidateAsync(request);
@@ -33,15 +34,9 @@ public class AddCustomerRequestHandler : AbstractEndPoint
 
         try
         {
-            var command = new AppAddCustomerCommand(
-                request.Id,
-                request.FirstName,
-                request.LastName,
-                request.Email,
-                request.PhoneNumber
-            );
+            var command = new AppSubtractInventoryCommand(inventoryId, request.Quantity);
             await dispatcher.DispatchAsync(command);
-            return TypedResults.Created();
+            return TypedResults.NoContent();
         }
         catch (Exception e)
         {
