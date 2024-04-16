@@ -32,7 +32,6 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddCommands();
 builder.Services.AddQueries();
-builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAuthContextServices();
 builder.Services.AddScoped<IRepository, Repository>();
 
