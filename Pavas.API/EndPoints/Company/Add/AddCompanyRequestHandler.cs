@@ -22,7 +22,7 @@ public class AddCompanyRequestHandler : AbstractEndPoint
     )
     {
         var validationResult = await validator.ValidateAsync(request);
-        if (validationResult.Errors is not null)
+        if (!validationResult.IsValid)
         {
             return TypedResults.BadRequest<object>(new
             {

@@ -19,11 +19,12 @@ public class SubtractInventoryRequestHandler : AbstractEndPoint
         [FromServices] IValidator<SubtractInventoryRequest> validator,
         [FromServices] ICommandDispatcher dispatcher,
         [FromBody] SubtractInventoryRequest request,
+        [FromServices] ILogger<SubtractInventoryRequestHandler> logger,
         int inventoryId
     )
     {
         var validationResult = await validator.ValidateAsync(request);
-        if (validationResult.Errors is not null)
+        if (!validationResult.IsValid)
         {
             return TypedResults.BadRequest<object>(new
             {

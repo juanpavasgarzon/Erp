@@ -23,8 +23,6 @@ public class AddInventoryRequestValidator : AbstractValidator<AddInventoryReques
             .WithMessage("The CompanyId Attribute Is Required");
 
         RuleFor(i => i.Type)
-            .NotEmpty()
-            .WithMessage("The Type Attribute Is Required")
             .IsInEnum()
             .WithMessage("The Type must be a valid enum value");
 
